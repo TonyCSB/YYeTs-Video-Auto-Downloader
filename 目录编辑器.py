@@ -39,7 +39,7 @@ def select(choice):
     elif choice == 4:
         printFile()
     else:
-        exit
+        exit()
 
 def printList():
     videoName, indexNumber, episode = processFile()
