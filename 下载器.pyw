@@ -47,7 +47,7 @@ def download(videoList):
             index1 = text.find("<magnet>")
             index2 = text.find("</magnet>")
             magnetLink = text[index1 + 8:index2]
-##            os.startfile(magnetLink)
+            os.startfile(magnetLink)
             changeFile(l[1], l[0], l[2], videoList)
 
 def changeFile(episode, indexNumber, videoName, videoList):
@@ -93,5 +93,4 @@ def changeFile(episode, indexNumber, videoName, videoList):
 if __name__ == "__main__":
     while True:
         main()
-        print(123)
         time.sleep(random.randrange(1, 15) * 60)
