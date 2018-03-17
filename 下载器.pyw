@@ -1,5 +1,8 @@
 import requests, os, time, random
 from 目录编辑器 import removeItem
+from datetime import datetime
+from time import strftime
+from pytz import timezone
 
 def main():
     filePath = "index.txt"
@@ -49,6 +52,32 @@ def download(videoList):
             magnetLink = text[index1 + 8:index2]
             os.startfile(magnetLink)
             changeFile(l[1], l[0], l[2], videoList)
+            createLog(l[1], l[2])
+            
+def createLog(episode, videoName):
+    filePath = "log.txt"
+    file = open(filePath, "r")
+    lines = file.readlines()
+    file.close()
+
+    oldLine = []
+    
+    for line in lines:
+        if "\n" in line:
+            line = line[:-1]
+
+        oldLine.append(line)
+
+    time = datetime.now(timezone("Asia/Shanghai")).strftime("%Y-%m-%d %H:%M:%S")
+    newLine = time + " GMT+8 " + videoName + " " + episode
+
+    oldLine.append(newLine)
+    lines = oldLine
+
+    file = open(filePath, "w")
+    for line in lines:
+        print(line, file = file)
+    file.close()
 
 def changeFile(episode, indexNumber, videoName, videoList):
     r = requests.get("http://diaodiaode.me/rss/feed/" + str(indexNumber))
