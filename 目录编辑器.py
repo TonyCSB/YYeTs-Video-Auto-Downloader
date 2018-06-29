@@ -84,8 +84,20 @@ def addItem():
 
     if "&apos;" in videoName:
         videoName = videoName.replace("&apos;", "'")
+
+    if "ö" in videoName:
+        videoName = videoName.replace("ö", "o")
     
     indexNumber = index
+
+    print("\n请确认影视剧名称：" + videoName + "(Y/N)\n")
+
+    while True:
+        answer = input()
+        if answer.lower()[0] == "y":
+            break
+        elif answer.lower()[0] == "n":
+            return False
 
     print("\n是否提取最新剧集？(Y/N)\n")
 
