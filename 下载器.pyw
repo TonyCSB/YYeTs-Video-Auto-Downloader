@@ -33,6 +33,7 @@ def processFile(file):
 def download(videoList):
     for l in videoList:
         episode, indexNumber = l[1], l[0]
+        attempt = True
         
         url = "http://diaodiaode.me/rss/feed/" + str(indexNumber)
 
@@ -41,11 +42,15 @@ def download(videoList):
         if episode == "S00E00":
             index = r.text.find("中英字幕")
         else:
-            episode = str(episode) + ".中英字幕"
-            index = r.text.find(episode)
+            episode1 = str(episode) + ".中英字幕"
+            index = r.text.find(episode1)
         if index == -1:
-            pass
-        else:
+            episode = str(episode) + ".END.中英字幕"
+            index = r.text.find(episode)
+            if index == -1:
+                attempt = False
+
+        if attempt:
             text = r.text[index:]
             index1 = text.find("<magnet>")
             index2 = text.find("</magnet>")
@@ -84,6 +89,7 @@ def changeFile(episode, indexNumber, videoName, videoList):
     
     if episode == "S00E00" or r.text.find("本剧完结") != -1:
         removeItem(indexNumber)
+        createLog("Removed", videoName)
     else:
         oldEpisode = episode
         episode = episode[1:]
