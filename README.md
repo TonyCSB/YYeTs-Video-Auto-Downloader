@@ -15,3 +15,13 @@
 
 - 可通过取消勾选 `在 Torrent 数据中显示更改名称和位置的选项` 跳过下载确认框
 ![μTorrent使用指南](https://user-images.githubusercontent.com/21008477/34857898-4a899dc4-f71b-11e7-895e-56e62e0e8ae4.png)
+
+### 依赖库
+```
+pip install requests
+pip install os
+pip install time
+pip install random
+pip install pytz
+pip install datetime
+```
